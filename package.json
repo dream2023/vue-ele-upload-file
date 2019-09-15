@@ -1,0 +1,65 @@
+{
+  "name": "vue-ele-upload-file",
+  "description": "对 element-ui upload 组件进一步封装, 使其更简单、易用",
+  "version": "0.0.1",
+  "private": false,
+  "license": "MIT",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dream2023/vue-ele-upload-file"
+  },
+  "main": "lib/index.js",
+  "homepage": "https://github.com/dream2023/vue-ele-upload-file/",
+  "keywords": [
+    "vue-ele-upload-file",
+    "element upload",
+    "element-ui upload",
+    "vue upload",
+    "vue uploader",
+    "vue",
+    "vue 上传"
+  ],
+  "dependencies": {
+    "ly-downloader": "^1.0.5",
+    "pretty-bytes": "^5.3.0"
+  },
+  "devDependencies": {
+    "core-js": "^2.6.5",
+    "vue": "^2.6.10",
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "babel-eslint": "^10.0.1",
+    "element-ui": "^2.9.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
