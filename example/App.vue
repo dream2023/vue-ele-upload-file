@@ -10,7 +10,7 @@
       :isShowSize="true"
       :isShowTip="true"
       :limit="6"
-      :multiple="false"
+      :multiple="true"
       :responseFn="handleResponse"
       action="https://jsonplaceholder.typicode.com/posts/"
       placeholder="上传附件"

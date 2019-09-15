@@ -1,7 +1,7 @@
 {
   "name": "vue-ele-upload-file",
   "description": "对 element-ui upload 组件进一步封装, 使其更简单、易用",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "license": "MIT",
   "scripts": {

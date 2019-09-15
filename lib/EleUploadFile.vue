@@ -156,11 +156,18 @@ export default {
     },
     // 列表
     list () {
+      let temp = 1
       if (this.value) {
         // 首先将值转为数组
         const list = Array.isArray(this.value) ? this.value : [this.value]
         // 然后将数组转为对象数组
-        return list.map((item) => typeof item === 'string' ? { name: item, url: item } : item)
+        return list.map((item) => {
+          if (typeof item === 'string') {
+            item = { name: item, url: item }
+          }
+          item.uid = item.uid || new Date() + temp++
+          return item
+        })
       } else {
         return []
       }
