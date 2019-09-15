@@ -1,44 +1,41 @@
 <template>
   <transition-group
-    class="ele-upload el-upload-list el-upload-list--text"
+    class="ele-upload-file-list el-upload-list el-upload-list--text"
     name="el-list"
     tag="ul"
   >
     <li
-      :class="['el-upload-list__item', 'is-' + file.status]"
       :key="file.uid"
-      class="el-upload-list__item"
+      class="el-upload-list__item ele-upload-list__item-content"
       v-for="(file, index) in files"
     >
-      <div class="ele-upload-list__item-content">
+      <el-link
+        :href="file.url"
+        :underline="false"
+        target="_blank"
+      >
+        <img
+          :src="getExtension(file.name)"
+          class="el-upload-list__item-content-name-icon"
+        />
+        <span>{{file.name}}</span>
+      </el-link>
+      <div class="ele-upload-list__item-content-action">
         <el-link
-          :href="file.url"
           :underline="false"
-          target="_blank"
-        >
-          <img
-            :src="getExtension(file.name)"
-            class="el-upload-list__item-content-name-icon"
-          />
-          <span>{{file.name}}</span>
-        </el-link>
-        <div class="ele-upload-list__item-content-action">
-          <el-link
-            :underline="false"
-            v-if="isShowSize"
-          >{{getSize(file.size)}}</el-link>
-          <el-link
-            :underline="false"
-            @click="handleDownload(file)"
-            v-if="isCanDownload"
-          >下载</el-link>
-          <el-link
-            :underline="false"
-            @click="handleDelete(index, file)"
-            type="danger"
-            v-if="!disabled && isCanDelete"
-          >删除</el-link>
-        </div>
+          v-if="isShowSize"
+        >{{getSize(file.size)}}</el-link>
+        <el-link
+          :underline="false"
+          @click="handleDownload(file)"
+          v-if="isCanDownload"
+        >下载</el-link>
+        <el-link
+          :underline="false"
+          @click="handleDelete(index, file)"
+          type="danger"
+          v-if="!disabled && isCanDelete"
+        >删除</el-link>
       </div>
     </li>
   </transition-group>
@@ -114,21 +111,21 @@ export default {
 </script>
 
 <style>
-.ele-upload .el-upload-list__item {
+.ele-upload-file-list .el-upload-list__item {
   border: 1px solid #e4e7ed;
   line-height: 2;
-  margin-top: 10px;
+  margin-bottom: 10px;
   position: relative;
 }
 
-.ele-upload .ele-upload-list__item-content {
+.ele-upload-file-list .ele-upload-list__item-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: inherit;
 }
 
-.ele-upload .el-upload-list__item-content-name-icon {
+.ele-upload-file-list .el-upload-list__item-content-name-icon {
   padding-left: 8px;
   padding-right: 5px;
   width: 20px;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ele-upload-file">
     <el-upload
       :accept="accept"
       :action="action"
@@ -16,6 +16,7 @@
       :on-success="handleUploadSuccess"
       :show-file-list="false"
       :withCredentials="withCredentials"
+      class="ele-upload-file-uploader"
       ref="upload"
       v-if="!disabled"
     >
@@ -247,3 +248,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.ele-upload-file-uploader {
+  margin-bottom: 5px;
+}
+</style>
