@@ -51,9 +51,14 @@ export default {
     // 文件列表
     files: {
       type: Array,
-      default() {
+      default () {
         return [];
       }
+    },
+    // 是否显示删除确认弹窗
+    isShowDeleteConfim: {
+      type: Boolean,
+      default: true
     },
     // 是否禁用
     disabled: {
@@ -91,7 +96,7 @@ export default {
       return size && !isNaN(Number(size)) ? prettyBytes(size) : ''
     },
     // 上传进度
-    parsePercentage(val) {
+    parsePercentage (val) {
       return parseInt(val, 10)
     },
     // 下载文件
@@ -101,10 +106,14 @@ export default {
       }
     },
     // 删除文件
-    handleDelete(index, file) {
-      this.$confirm('确认删除该文件吗? ').then(() => {
+    handleDelete (index, file) {
+      if (this.isShowDeleteConfim) {
+        this.$confirm('确认删除该文件吗? ').then(() => {
+          this.$emit('remove', index, file)
+        }).catch(() => { })
+      } else {
         this.$emit('remove', index, file)
-      }).catch(() => {})
+      }
     }
   }
 }

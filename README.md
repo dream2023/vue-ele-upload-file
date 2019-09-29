@@ -161,6 +161,14 @@ export default {
   },
 ```
 
+## 事件
+
+| 事件名称 | 说明               | 回调参数         |
+| -------- | ------------------ | ---------------- |
+| remove   | 当文件被删除时触发 | (file, fileList) |
+| success  | 文件上传成功时触发 | (file, fileList) |
+| error    | 上传失败时触发     | (error)          |
+
 ## 相关链接
 
 - [element-ui upload 组件](https://element.eleme.cn/#/zh-CN/component/upload)

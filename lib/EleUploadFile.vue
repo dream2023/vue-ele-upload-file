@@ -6,11 +6,12 @@
       :before-upload="handleBeforeUpload"
       :data="data"
       :drag="false"
-      :file-list="list"
+      :file-list="fileList"
       :headers="headers"
       :limit="limit"
       :multiple="multiple"
       :name="name"
+      :on-change="handleChange"
       :on-error="handleUploadError"
       :on-exceed="handleExceed"
       :on-success="handleUploadSuccess"
@@ -50,6 +51,7 @@
       :files="list"
       :isCanDelete="isCanDelete"
       :isCanDownload="isCanDownload"
+      :isShowDeleteConfim="isShowDeleteConfim"
       :isShowSize="isShowSize"
       @remove="handleRemove"
     />
@@ -97,6 +99,11 @@ export default {
       type: Boolean,
       default: true
     },
+    // 是否显示删除确认弹窗
+    isShowDeleteConfim: {
+      type: Boolean,
+      default: true
+    },
     // 是否可上传相同文件
     isCanUploadSame: {
       type: Boolean,
@@ -138,6 +145,11 @@ export default {
     // 同 element-ui upload 组件
     limit: Number
   },
+  data () {
+    return {
+      fileList: []
+    }
+  },
   computed: {
     // 按钮文本
     btnText () {
@@ -152,7 +164,7 @@ export default {
       }
     },
     // 是否显示提示
-    showTip() {
+    showTip () {
       return this.isShowTip && (this.fileType || this.fileSize)
     },
     // 列表
@@ -166,7 +178,7 @@ export default {
           if (typeof item === 'string') {
             item = { name: item, url: item }
           }
-          item.uid = item.uid || new Date() + temp++
+          item.uid = item.uid || new Date().getTime() + temp++
           return item
         })
       } else {
@@ -175,6 +187,10 @@ export default {
     }
   },
   methods: {
+    // 文件改变
+    handleChange (file, fileList) {
+      this.fileList = fileList
+    },
     // 上传前校检格式和大小
     handleBeforeUpload (file) {
       // 校检文件类型
@@ -234,17 +250,25 @@ export default {
       } else {
         this.$emit('input', response)
       }
+
+      // 上传成功
+      this.$emit('success', response, this.list)
     },
     // 删除
-    handleRemove(index) {
+    handleRemove (index) {
+      this.$emit('remove', this.list[index], this.list)
+      this.fileList.splice(index, 1)
       if (this.multiple) {
         const data = [...this.list]
         data.splice(index, 1)
         this.$emit('input', data || [])
       } else {
-        this.$emit('input', {})
+        this.$emit('input', null)
       }
     }
+  },
+  created () {
+    this.fileList = this.list
   }
 }
 </script>
