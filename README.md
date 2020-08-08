@@ -16,13 +16,13 @@ npm install vue-ele-upload-file --save
 ### 用法
 
 ```js
-import EleUploadFile from 'vue-ele-upload-file'
+import EleUploadFile from "vue-ele-upload-file";
 
 export default {
   components: {
     EleUploadFile
   }
-}
+};
 ```
 
 ## 示例
@@ -42,7 +42,7 @@ export default {
     data() {
       return {
         file: []
-      }
+      };
     },
     methods: {
       // 对请求结果处理, 返回对象
@@ -51,10 +51,10 @@ export default {
           url: URL.createObjectURL(file.raw),
           name: file.name,
           size: file.size
-        }
+        };
       }
     }
-  }
+  };
 </script>
 ```
 
@@ -128,6 +128,14 @@ export default {
       type: Boolean,
       default: true
     },
+    // 是否显示上传成功的提示
+    isShowSuccessTip: {
+      type: Boolean,
+      default: true
+    },
+    // 删除前的操作
+    // 同 element-ui upload 组件
+    beforeRemove: Function
     // 设置上传的请求头部
     // 同 element-ui upload 组件
     headers: Object,
