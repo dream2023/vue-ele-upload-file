@@ -1,22 +1,17 @@
 <template>
   <div class="ele-upload-file">
     <el-upload
-      :accept="accept"
-      :action="action"
       :before-upload="handleBeforeUpload"
-      :data="data"
       :drag="false"
       :file-list="fileList"
-      :headers="headers"
       :limit="limit"
       :multiple="multiple"
-      :name="name"
       :on-change="handleChange"
       :on-error="handleUploadError"
       :on-exceed="handleExceed"
+      v-bind="$attrs"
       :on-success="handleUploadSuccess"
       :show-file-list="false"
-      :withCredentials="withCredentials"
       class="ele-upload-file-uploader"
       ref="upload"
       v-if="!disabled"
@@ -54,19 +49,14 @@
 <script>
 import EleUploadList from "./EleUploadList";
 export default {
+  inheritAttrs: false,
   name: "EleUploadFile",
   components: {
-    EleUploadList,
+    EleUploadList
   },
   props: {
     // 值
     value: [String, Object, Array],
-    // 必选参数，上传的地址
-    // 同 element-ui upload 组件
-    action: {
-      type: String,
-      required: true,
-    },
     // 大小限制(MB)
     fileSize: Number,
     // 响应处理函数
@@ -80,75 +70,54 @@ export default {
     // 是否显示文件大小
     isShowSize: {
       type: Boolean,
-      default: true,
+      default: true
     },
     // 是否显示下载
     isCanDownload: {
       type: Boolean,
-      default: true,
+      default: true
     },
     // 是否可删除
     isCanDelete: {
       type: Boolean,
-      default: true,
+      default: true
     },
     // 是否显示删除确认弹窗
     isShowDeleteConfim: {
       type: Boolean,
-      default: true,
+      default: true
     },
     // 是否可上传相同文件
     isCanUploadSame: {
       type: Boolean,
-      default: true,
+      default: true
     },
     // 是否显示提示
     isShowTip: {
       type: Boolean,
-      default: true,
+      default: true
     },
     // 是否显示上传成功的提示
     isShowSuccessTip: {
       type: Boolean,
-      default: true,
+      default: true
     },
-    // 设置上传的请求头部
-    // 同 element-ui upload 组件
-    headers: Object,
     // 是否支持多选文件
     // 同 element-ui upload 组件
     multiple: {
       type: Boolean,
-      default: true,
+      default: true
     },
-    // 上传时附带的额外参数
-    // 同 element-ui upload 组件
-    data: Object,
-    // 上传的文件字段名
-    // 同 element-ui upload 组件
-    name: {
-      type: String,
-      default: "file",
-    },
-    // 支持发送 cookie 凭证信息
-    // 同 element-ui upload 组件
-    withCredentials: {
-      type: Boolean,
-      default: false,
-    },
-    // 接受上传的文件类型
-    // 同 element-ui upload 组件
-    accept: String,
     // 最大允许上传个数
     // 同 element-ui upload 组件
     limit: Number,
     // 删除前的操作
     // 同 element-ui upload 组件
-    beforeRemove: Function,
+    beforeRemove: Function
   },
   data() {
     return {
-      fileList: [],
+      fileList: []
     };
   },
   computed: {
@@ -175,7 +144,7 @@ export default {
         // 首先将值转为数组
         const list = Array.isArray(this.value) ? this.value : [this.value];
         // 然后将数组转为对象数组
-        return list.map((item) => {
+        return list.map(item => {
           if (typeof item === "string") {
             item = { name: item, url: item };
           }
@@ -185,7 +154,7 @@ export default {
       } else {
         return [];
       }
-    },
+    }
   },
   methods: {
     // 文件改变
@@ -200,7 +169,7 @@ export default {
         if (file.name.lastIndexOf(".") > -1) {
           fileExtension = file.name.slice(file.name.lastIndexOf(".") + 1);
         }
-        const isTypeOk = this.fileType.some((type) => {
+        const isTypeOk = this.fileType.some(type => {
           if (file.type.indexOf(type) > -1) return true;
           if (fileExtension && fileExtension.indexOf(type) > -1) return true;
           return false;
@@ -226,7 +195,7 @@ export default {
       // 校检相同文件
       if (!this.isCanUploadSame) {
         const isSame = this.list.some(
-          (item) => item.name + item.size === file.name + file.size
+          item => item.name + item.size === file.name + file.size
         );
         if (isSame) {
           this.$message.error(`此文件已上传!`);
@@ -289,11 +258,11 @@ export default {
       } else {
         this.$emit("input", null);
       }
-    },
+    }
   },
   created() {
     this.fileList = this.list;
-  },
+  }
 };
 </script>
 
