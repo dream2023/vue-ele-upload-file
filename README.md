@@ -32,7 +32,7 @@ export default {
 ```html
 <template>
   <ele-upload-file
-    :responseFn="handleResponse"
+    :responseFn="responseFn"
     action="https://jsonplaceholder.typicode.com/posts/"
     v-model="file"
   />
@@ -46,7 +46,7 @@ export default {
     },
     methods: {
       // 对请求结果处理, 返回对象
-      handleResponse(response, file) {
+      responseFn(response, file) {
         return {
           url: URL.createObjectURL(file.raw),
           name: file.name,
